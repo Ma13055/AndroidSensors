@@ -149,9 +149,9 @@ public class RTMonAndroidImpl extends RTCBase {
 	 * OutPort初期化
 	 */
 	private void initOutPort(){
-		String AName = RTMonAndroidProfile.OutPort3;
+		String AName = RTMonAndroidProfile.OutPort1;
 		String PName = RTMonAndroidProfile.OutPort2;
-		String RName = RTMonAndroidProfile.OutPort1;
+		String RName = RTMonAndroidProfile.OutPort3;
 		TimedDouble Az = new TimedDouble();
 		TimedDouble Pi = new TimedDouble();
 		TimedDouble Ro = new TimedDouble();

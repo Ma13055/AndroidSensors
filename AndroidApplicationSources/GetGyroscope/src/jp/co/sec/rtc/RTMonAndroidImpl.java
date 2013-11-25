@@ -71,17 +71,17 @@ public class RTMonAndroidImpl extends RTCBase {
 		Logger4RTC.debug(TAG, "onExecute");
 		if(myRTC.getSensorBoolean() == true){
 			RTCtm = myRTC.getRTCTime();
-			dataX.setData(myRTC.getRoll());
+			dataX.setData(myRTC.getPitch());
 			dataX.setTm(RTCtm);
-			dataY.setData(myRTC.getPitch());
+			dataY.setData(myRTC.getRoll());
 			dataY.setTm(RTCtm);
 			dataZ.setData(myRTC.getYaw());
 			dataZ.setTm(RTCtm);
 			String str = "";
 			str = "ジャイロセンサ[rad/s]\n"
-					+ "Roll : " + dataX.getData() + "\n"
-					+ "Pitch : " + dataY.getData() + "\n"
-					+ "Yaw : " + dataZ.getData() + "\n"
+					+ "PitchV : " + dataX.getData() + "\n"
+					+ "RollV : " + dataY.getData() + "\n"
+					+ "YawV : " + dataZ.getData() + "\n"
 					+ "TIME : " + RTCtm.toString();
 			myRTC.textDraw(str);		// 画面表示
 			ioControl();

@@ -81,8 +81,8 @@ public class RTMonAndroidOfGyroscope extends Activity {
 	
 	//出力データ用変数
 	private Date sys = new Date();		//sec取得用
-	private double dataRoll = 0;			//ジャイロセンサx軸回りの速度情報
-	private double dataPitch = 0;			//ジャイロセンサy軸回りの速度情報
+	private double dataPitch = 0;			//ジャイロセンサx軸回りの速度情報
+	private double dataRoll = 0;			//ジャイロセンサy軸回りの速度情報
 	private double dataYaw = 0;			//ジャイロセンサz軸回りの速度情報
 	private RTCTime RTCtm = new RTCTime();
 	
@@ -392,17 +392,17 @@ public class RTMonAndroidOfGyroscope extends Activity {
 	 * ジャイロセンサのx軸の回転速度情報を返す
 	 * @return x軸の回転速度(double)
 	 */
-	public double getRoll(){
-		return dataRoll;
-	}
-
+	public double getPitch(){
+		return dataPitch;
+	}	
+	
 	/**
 	 * ジャイロセンサのy軸の回転速度情報を返す
 	 * @return y軸の回転速度(double)
 	 */
-	public double getPitch(){
-		return dataPitch;
-	}	
+	public double getRoll(){
+		return dataRoll;
+	}
 	
 	/**
 	 * ジャイロセンサのz軸の回転速度情報を返す
@@ -433,9 +433,9 @@ public class RTMonAndroidOfGyroscope extends Activity {
 	class SampleSensorEventListener implements SensorEventListener{
 		public void onSensorChanged(SensorEvent e){
 			if(e.sensor.getType()==Sensor.TYPE_GYROSCOPE){
-				dataRoll = e.values[0];
-				dataPitch = e.values[1];
-				dataYaw = e.values[2];
+				dataPitch = e.values[SensorManager.DATA_X];
+				dataRoll = e.values[SensorManager.DATA_Y];
+				dataYaw = e.values[SensorManager.DATA_Z];
 			}
 		}
 		

@@ -26,7 +26,7 @@ public class RTMonAndroidProfile {
 	//	Non
 
 	// << out port >>
-	public static final String OutPort1			= "OutDoubleRoll";
-	public static final String OutPort2			= "OutDoublePitch";
+	public static final String OutPort1			= "OutDoublePitch";
+	public static final String OutPort2			= "OutDoubleRoll";
 	public static final String OutPort3			= "OutDoubleYaw";
 }
