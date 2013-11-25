@@ -1,0 +1,54 @@
+# OrientationFilter CMake config file
+#
+# This file sets the following variables:
+# OrientationFilter_FOUND - Always TRUE.
+# OrientationFilter_INCLUDE_DIRS - Directories containing the OrientationFilter include files.
+# OrientationFilter_IDL_DIRS - Directories containing the OrientationFilter IDL files.
+# OrientationFilter_LIBRARIES - Libraries needed to use OrientationFilter.
+# OrientationFilter_DEFINITIONS - Compiler flags for OrientationFilter.
+# OrientationFilter_VERSION - The version of OrientationFilter found.
+# OrientationFilter_VERSION_MAJOR - The major version of OrientationFilter found.
+# OrientationFilter_VERSION_MINOR - The minor version of OrientationFilter found.
+# OrientationFilter_VERSION_REVISION - The revision version of OrientationFilter found.
+# OrientationFilter_VERSION_CANDIDATE - The candidate version of OrientationFilter found.
+
+message(STATUS "Found OrientationFilter-@PROJECT_VERSION@")
+set(OrientationFilter_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(OrientationFilter_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(OrientationFilter_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(OrientationFilter_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(OrientationFilter_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(OrientationFilter_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(OrientationFilter_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(OrientationFilter_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(OrientationFilter_VERSION @PROJECT_VERSION@)
+set(OrientationFilter_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(OrientationFilter_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(OrientationFilter_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(OrientationFilter_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
