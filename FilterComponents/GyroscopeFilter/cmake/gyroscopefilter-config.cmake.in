@@ -1,0 +1,54 @@
+# GyroscopeFilter CMake config file
+#
+# This file sets the following variables:
+# GyroscopeFilter_FOUND - Always TRUE.
+# GyroscopeFilter_INCLUDE_DIRS - Directories containing the GyroscopeFilter include files.
+# GyroscopeFilter_IDL_DIRS - Directories containing the GyroscopeFilter IDL files.
+# GyroscopeFilter_LIBRARIES - Libraries needed to use GyroscopeFilter.
+# GyroscopeFilter_DEFINITIONS - Compiler flags for GyroscopeFilter.
+# GyroscopeFilter_VERSION - The version of GyroscopeFilter found.
+# GyroscopeFilter_VERSION_MAJOR - The major version of GyroscopeFilter found.
+# GyroscopeFilter_VERSION_MINOR - The minor version of GyroscopeFilter found.
+# GyroscopeFilter_VERSION_REVISION - The revision version of GyroscopeFilter found.
+# GyroscopeFilter_VERSION_CANDIDATE - The candidate version of GyroscopeFilter found.
+
+message(STATUS "Found GyroscopeFilter-@PROJECT_VERSION@")
+set(GyroscopeFilter_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(GyroscopeFilter_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(GyroscopeFilter_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(GyroscopeFilter_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(GyroscopeFilter_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(GyroscopeFilter_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(GyroscopeFilter_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(GyroscopeFilter_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(GyroscopeFilter_VERSION @PROJECT_VERSION@)
+set(GyroscopeFilter_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(GyroscopeFilter_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(GyroscopeFilter_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(GyroscopeFilter_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

@@ -1,0 +1,161 @@
+RotationVectorFilterName - English
+========================
+
+.. toctree::
+   :hidden:
+
+   index_j
+
+
+Introduction
+============
+
+
+For a full list of classes and functions, see the `API documentation`_.
+
+.. _`API Documentation`:
+   doxygen/html/index.html
+
+Requirements
+============
+
+RotationVectorFilter uses the `CMake build system`. You will need at least version
+2.8 to be able to build the component.
+
+.. _`CMAke build system`:
+   http://www.cmake.org
+
+
+Installation
+============
+
+Binary
+------
+
+Users of Windows can install the component using the binary installer. This
+will install the component and all its necessary dependencies. It is the
+recommended method of installation in Windows.
+
+- Download the installer from the website.
+- Double-click the executable file to begin installation.
+- Follow the instructions to install the component.
+- You may need to restart your computer for environment variable changes
+  to take effect before using the component.
+
+The component can be launched by double-clicking the
+``RotationVectorFilterComp`` executable. The ``RotationVectorFilter`` library
+is available for loading into a manager, using the initialisation function
+``RotationVectorFilterInit``.
+
+From source
+-----------
+
+Follow these steps to install RotationVectorFilter from source in any operating
+system:
+
+- Download the source, either from the repository or a source archive,
+  and extract it somewhere::
+
+    tar -xvzf RotationVectorFilter-1.0.0.tar.gz
+
+- Change to the directory containing the extracted source::
+
+    cd RotationVectorFilter-1.0.0
+
+- Create a directory called ``build``::
+
+    mkdir build
+
+- Change to that directory::
+
+    cd build
+
+- Run cmake or cmake-gui::
+
+    cmake ../
+
+- If no errors occurred, run make::
+
+    make
+
+- Finally, install the component. Ensure the necessary permissions to
+  install into the chosen prefix are available::
+
+    make install
+
+- The install destination can be changed by executing ccmake and changing
+  the variable ``CMAKE_INSTALL_PREFIX``::
+
+    ccmake ../
+
+The component is now ready for use. See the next section for instructions on
+configuring the component.
+
+RotationVectorFilter can be launched in stand-alone mode by executing the
+``RotationVectorFilterComp`` executable (installed into ``${prefix}/components/bin``).
+Alternatively, ``libRotationVectorFilter.so`` can be loaded into a manager, using the
+initialisation function ``RotationVectorFilterInit``. This shared object can be found in
+``${prefix}/components/lib`` or ``${prefix}/components/lib64``.
+
+
+Configuration
+=============
+
+The available configuration parameters are described below:
+
+================ ================== ================ ======
+Parameter        Data type          Default Value    Effect
+================ ================== ================ ======
+ImportTextName   string             null             File name you want to load.
+ChangedOfBaseline int                0                Change the baseline of the sensor to current value.
+VariableToRounding int                1                Variable rounding of input data.<br/>Sensor sensitivity reduces variable increases.
+PitchTime        int                0                cycle of the read mode.
+================ ================== ================ ======
+
+Ports
+=====
+
+The ports provided by the component are described below:
+
+=============== =========== ============================== =======
+Name            Type        Data type                      Purpose
+=============== =========== ============================== =======
+InTimedDoubleDataX InPort      RTC::TimedDouble               Output dataX from "GetRotationVector" is input.
+InTimedDoubleDataY InPort      RTC::TimedDouble               Output dataY from "GetRotationVector" is input.
+InTimedDoubleDataZ InPort      RTC::TimedDouble               Output dataZ from "GetRotationVector" is input.
+InTimedDoubleDataCos InPort      RTC::TimedDouble               Output dataCos from "GetRotationVector" is input.
+InTimedDoubleAccuracy InPort      RTC::TimedDouble               Output dataAccuracy from "GetRotationVector" is input.
+OutTimedVector3D OutPort     RTC::TimedVector3D             RotationVector sensor data in the X , Y and Z axis of the filtered are output.
+OutTimedDoubleDataX OutPort     RTC::TimedDouble               RotationVector sensor data in the X-axis of the filtered is output.
+OutTimedDoubleDataY OutPort     RTC::TimedDouble               RotationVector sensor data in the Y-axis of the filtered is output.
+OutTimedDoubleDataZ OutPort     RTC::TimedDouble               RotationVector sensor data in the Z-axis of the filtered is output.
+OutTimedDoubleDataCos OutPort     RTC::TimedDouble               RotationVector sensor data in the Cos of the filtered is output.
+OutTimedDoubleAccuracy OutPort     RTC::TimedDouble               RotationVector sensor data in the Accuracy of the filtered is output.
+OutTimedDoubleSeq OutPort     RTC::TimedDoubleSeq            RotationVector sensor data in the X , Y and Z axis of the filtered are output.<br/>seq[0] = dataX<br/>seq[1] = dataY<br/>seq[2] = dataZ
+OutTimedFloatDataX OutPort     RTC::TimedFloat                RotationVector sensor data in the X-axis of the filtered is output.
+OutTimedFloatDataY OutPort     RTC::TimedFloat                RotationVector sensor data in the Y-axis of the filtered is output.
+OutTimedFloatDataZ OutPort     RTC::TimedFloat                RotationVector sensor data in the Z-axis of the filtered is output.
+OutTimedFloatDataCos OutPort     RTC::TimedFloat                RotationVector sensor data in the Cos of the filtered is output.
+OutTimedFloatAccuracy OutPort     RTC::TimedFloat                RotationVector sensor data in the Accuracy of the filtered is output.
+OutTimedFloatSeq OutPort     RTC::TimedFloatSeq             RotationVector sensor data in the X , Y and Z axis of the filtered are output.<br/>seq[0] = dataX<br/>seq[1] = dataY<br/>seq[2] = dataZ
+=============== =========== ============================== =======
+
+Examples
+========
+
+An example configuration file is provided in the
+``${prefix}/components/share/RotationVectorFilter/examples/conf/`` directory.
+
+Changelog
+=========
+
+
+
+License
+=======
+
+This software is developed at the National Institute of Advanced
+Industrial Science and Technology. Approval number H23PRO-????. This
+software is licensed under the Lesser General Public License. See
+COPYING.LESSER.
+
