@@ -255,7 +255,7 @@ public class GravityFilterImpl extends DataFlowComponentBase {
     protected ReturnCode_t onActivated(int ec_id) {
        	startTime = Calendar.getInstance();
     	startYear = startTime.get(Calendar.YEAR);
-    	startMonth = startTime.get(Calendar.MONTH);
+    	startMonth = startTime.get(Calendar.MONTH)+1;
     	startDay = startTime.get(Calendar.DAY_OF_MONTH);
     	startHour = startTime.get(Calendar.HOUR_OF_DAY);
     	startMinute = startTime.get(Calendar.MINUTE);
