@@ -81,8 +81,8 @@ public class RTMonAndroidOfGyroscope extends Activity {
 	
 	//出力データ用変数
 	private Date sys = new Date();		//sec取得用
-	private double dataPitch = 0;			//ジャイロセンサx軸回りの速度情報
-	private double dataRoll = 0;			//ジャイロセンサy軸回りの速度情報
+	private double dataPitch = 0;			//ジャイロセンサy軸回りの速度情報
+	private double dataRoll = 0;			//ジャイロセンサx軸回りの速度情報
 	private double dataYaw = 0;			//ジャイロセンサz軸回りの速度情報
 	private RTCTime RTCtm = new RTCTime();
 	

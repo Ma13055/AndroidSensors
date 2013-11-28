@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GetSensors"</string>
+    <string name="textview01_label">使用したいセンサのボタンをチェックしてください</string>
+    <string name="checkbox01_label">Acceleration</string>
+    <string name="checkbox02_label">LinearAcceleration</string>
+    <string name="checkbox03_label">Gyroscope</string>
+    <string name="checkbox04_label">Gravity</string>
+    <string name="checkbox05_label">MagneticField</string>
+    <string name="checkbox06_label">Orientation</string>
+    <string name="checkbox07_label">RotationVector</string>
+    <string name="checkbox08_label">Light</string>
+    <string name="checkbox09_label">Pressure</string>
+    <string name="checkbox10_label">Proximity</string>
+    <string name="checkbox11_label">AmbientTemperature</string>
+    <string name="checkbox12_label">GPS</string>
+    <string name="button_label">選択決定</string>
+
+</resources>

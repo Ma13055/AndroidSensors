@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jp.ac.it.shibaura.android.pressure;
-
-import java.util.Date;
-import java.util.List;
+package jp.ac.it.shibaura.android.sensors;
 
 import jp.co.sec.rtc.RTMonAndroidProfile;
 import jp.co.sec.rtc.RTMonAndroidImpl;
@@ -33,6 +30,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.SpannableStringBuilder;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +48,7 @@ import android.os.Message;
 /**
  * RTMonAndroid
  */
-public class RTMonAndroidOfPressure extends Activity {
+public class RTMonAndroidOfSensors extends Activity {
 	private static final String TAG = "MyRTC";
 
 	private static final String Pref_NameServerAddress = "NameServerAddress";	// ネームサーバーアドレスをプリファレンスで扱うときのタグ
@@ -70,23 +68,35 @@ public class RTMonAndroidOfPressure extends Activity {
 
 	private String			nameServer;			// ネームサーバーアドレス
 
-	private RTMonAndroidImpl rtcImpl;
+	private RTMonAndroidImpl rtcImpl = null;
 
 	private boolean			drawText = false;
 	
+	int Height = 0;
+	
 	//センサ情報取得用変数
 	private SensorManager sm;
-	private Sensor s;
-	private SampleSensorEventListener sse;
+	private SetSensorEventListener sse;
 	
 	//出力データ用変数
-	private Date sys = new Date();		//sec取得用
-	private double datahPa = 0;			//気圧センサの圧力情報
 	private RTCTime RTCtm = new RTCTime();
+	private double[] Accele = new double[3];		//加速度センサ情報
+	private double[] LinearAccele = new double[3];	//線形加速度センサ情報
+	private double[] Gyro = new double[3];			//ジャイロセンサ情報
+	private double[] Gravity = new double[3];		//重力加速度センサ情報
+	private double[] Magnetic = new double[3];		//磁気センサ情報
+	private double[] Orientation = new double[3];	//傾きセンサ情報
+	private double[] RotationV = new double[5];		//回転ベクトル情報
+	private double LightData;						//照度センサ情報
+	private double PressureData;					//圧力センサ情報
+	private double ProximityData;					//近接センサ情報
+	private double AmbientData;						//周辺温度センサ情報
 	
-	private boolean getSensorFlag = false;
-
-
+	boolean[] sensors = new boolean[11];
+	boolean[] getValueFlag = new boolean[11];
+	
+	String str = "";
+	
 	/**
 	 * アプリ生成
 	 */
@@ -99,7 +109,7 @@ public class RTMonAndroidOfPressure extends Activity {
 
 		rtcService = null;
 		serviceConnection = null;
-		setContentView(R.layout.main);
+		if(rtcImpl == null)setContentView(R.layout.sub);
 		initToast();
 
 		myEditText = (EditText)findViewById(R.id.editText);
@@ -109,12 +119,18 @@ public class RTMonAndroidOfPressure extends Activity {
 		myStopButton  = (Button)findViewById(R.id.stopButton);
 
 		myInDataView = (TextView)findViewById(R.id.inDataView);
+		myInDataView.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
+		Intent intent = getIntent();
+		sensors = intent.getBooleanArrayExtra("Sensors");
 
+		
 		/**
 		 *	START RTC ボタン
 		 */
 		myStartButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				
 				Logger4RTC.debug(TAG, "startRTC Button Pushed");
 				if (nameServerConnectTask == null) {
 					connectNameServer();		// NameServerへの接続
@@ -140,7 +156,7 @@ public class RTMonAndroidOfPressure extends Activity {
 			}
 		});
 		
-		sse = new SampleSensorEventListener();
+		sse = new SetSensorEventListener();
 	}
 
 	/**
@@ -161,15 +177,84 @@ public class RTMonAndroidOfPressure extends Activity {
 		drawText = true;
 		Logger4RTC.debug(TAG, "onResume");
 		sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-		List<Sensor> ss = sm.getSensorList(Sensor.TYPE_PRESSURE);
-		if(ss.size() > 0){
-			s = ss.get(0);
-			sm.registerListener(sse,s,SensorManager.SENSOR_DELAY_NORMAL);
-			getSensorFlag = true;
-		}else{
-			getSensorFlag = false;
-			textDraw("NO SUPPORT");
+		
+		for(int i=0;i<11;i++){
+			if(sensors[i]==true){
+				switch(i){
+				case 0:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getAcceleration\n";
+					break;
+				case 1:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getLinearAcceleration\n";
+					break;
+				case 2:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getGyroscope\n";
+					break;
+				case 3:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_GRAVITY),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getGravity\n";
+					break;
+				case 4:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getMagneticField\n";
+					break;
+				case 5:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getOrientation\n";
+					break;
+				case 6:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getRotationVector\n";
+					break;
+				case 7:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_LIGHT),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getLight\n";
+					break;
+				case 8:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_PRESSURE),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getPressure\n";
+					break;
+				case 9:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_PROXIMITY),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getProximity\n";
+					break;
+				case 10:
+					sm.registerListener(sse,
+							sm.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE),
+							SensorManager.SENSOR_DELAY_GAME);
+					str += "getAmbientTemperature\n";
+					break;
+				default:
+					break;
+				}
+			}
 		}
+		if(rtcImpl == null)textDraw(str);
+
+		
 	}
 
 	/**
@@ -222,7 +307,7 @@ public class RTMonAndroidOfPressure extends Activity {
 		 * RTCサービスを開始
 		 */
 		public void onConnected() {
-			Intent intent = new Intent(RTMonAndroidOfPressure.this, RTCService.class);
+			Intent intent = new Intent(RTMonAndroidOfSensors.this, RTCService.class);
 			startService(intent);
 			serviceConnection = new RtcServiceConnection();
 			bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
@@ -260,7 +345,7 @@ public class RTMonAndroidOfPressure extends Activity {
 					RTMonAndroidProfile.Vendor,				RTMonAndroidProfile.Category,
 					String.valueOf(RTMonAndroidProfile.execute_rate));
 
-			rtcImpl = new RTMonAndroidImpl(RTMonAndroidOfPressure.this, rtcService);
+			rtcImpl = new RTMonAndroidImpl(RTMonAndroidOfSensors.this, rtcService, sensors);
 
 			SpannableStringBuilder sb = (SpannableStringBuilder)myEditText.getText();	// EditTextに入力された文字
 			rtcService.startRTC(sb.toString(), context.getPackageName());		// START RTC
@@ -286,7 +371,7 @@ public class RTMonAndroidOfPressure extends Activity {
 		if (serviceConnection != null) {
 			unbindService(serviceConnection);
 			serviceConnection = null;
-			Intent intent = new Intent(RTMonAndroidOfPressure.this, RTCService.class);
+			Intent intent = new Intent(RTMonAndroidOfSensors.this, RTCService.class);
 			stopService(intent);
 		}
 
@@ -302,7 +387,7 @@ public class RTMonAndroidOfPressure extends Activity {
 		Logger4RTC.debug(TAG, "receiverDraw : " + str);
 		mToastHandler.sendMessage(mToastHandler.obtainMessage(MSG_TEXT, str));
 	}
-
+	
 	/**
 	 * トースト表示のハンドラで表示の為の初期化
 	 */
@@ -382,16 +467,96 @@ public class RTMonAndroidOfPressure extends Activity {
 		return true;
 	}
 	
-	public boolean getSensorBoolean(){
-		return getSensorFlag;
+	public boolean[] getSensorChose(){
+		return sensors;
+	}
+	
+	/**
+	 * 加速度センサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getAccele(){
+		return Accele;
+	}
+	
+	/**
+	 * 線形加速度センサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getLinerAccele(){
+		return LinearAccele;
+	}
+
+	/**
+	 * ジャイロセンサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getGyro(){
+		return Gyro;
+	}
+
+	/**
+	 * 重力加速度センサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getGravity(){
+		return Gravity;
+	}
+
+	/**
+	 * 磁気センサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getMagneticField(){
+		return Magnetic;
+	}
+
+	/**
+	 * 傾きセンサの情報を返す
+	 * @return 三軸のセンサ値配列(double[3])
+	 */
+	public double[] getOrientation(){
+		return Orientation;
+	}
+
+	/**
+	 * 回転ベクトルセンサの情報を返す
+	 * @return センサ値配列(double[5])
+	 */
+	public double[] getRotationVector(){
+		return RotationV;
+	}
+
+	/**
+	 * 照度センサの情報を返す
+	 * @return 照度センサ値(double)
+	 */
+	public double getLight(){
+		return LightData;
 	}
 	
 	/**
 	 * 気圧センサの情報を返す
-	 * @return 圧力(double)
+	 * @return 気圧センサ値(double)
 	 */
-	public double gethPa(){
-		return datahPa;
+	public double getPressure(){
+		return PressureData;
+	}
+
+	/**
+	 * 近接センサの情報を返す
+	 * @return 近接センサ値(double)
+	 */
+	public double getProximity(){
+		return ProximityData;
+	}
+
+	/**
+	 * 温度センサの情報を返す
+	 * @return 温度センサ値(double)
+	 */
+	public double getAmbientTemperature(){
+		return AmbientData;
 	}
 	
 	/**
@@ -405,18 +570,88 @@ public class RTMonAndroidOfPressure extends Activity {
 		int nsec = (int)((millisTm%1000)*1000000+nanoTm);
 		RTCtm.set(sec, nsec);
 		return RTCtm;
+	}	
+	
+	/**
+	 * センサが一度でも実行されたかどうかのフラグを返す
+	 * @return 実行フラグ
+	 */
+	public boolean[] getValueFlag(){
+		return getValueFlag;
 	}
 		
 	/**
-	 * センサの情報を監視して、気圧センサのデータが変化するたびに、
-	 * プログラム内の気圧センサ用変数の値を更新する
-	 * TYPE_PRESSURE == 気圧センサ
+	 * センサの情報を監視して、加速度センサのデータが変化するたびに、
+	 * プログラム内の加速度センサ用変数の値を更新する
+	 * TYPE_ACCELEROMETER == 加速度センサ
 	 */
-	class SampleSensorEventListener implements SensorEventListener{
+	class SetSensorEventListener implements SensorEventListener{
 		public void onSensorChanged(SensorEvent e){
-			if(e.sensor.getType()==Sensor.TYPE_PRESSURE){
-				datahPa = e.values[0];
+			switch(e.sensor.getType()){
+			case Sensor.TYPE_ACCELEROMETER:
+				Accele[0] = e.values[0];	//加速度センサx軸情報
+				Accele[1] = e.values[1];	//加速度センサy軸情報
+				Accele[2] = e.values[2];	//加速度センサz軸情報
+				getValueFlag[0] = true;
+				break;
+			case Sensor.TYPE_LINEAR_ACCELERATION:
+				LinearAccele[0] = e.values[0];	//線形加速度センサx軸情報
+				LinearAccele[1] = e.values[1];	//線形加速度センサy軸情報
+				LinearAccele[2] = e.values[2];	//線形加速度センサz軸情報
+				getValueFlag[1] = true;
+				break;
+			case Sensor.TYPE_GYROSCOPE:
+				Gyro[0] = e.values[0];	//ジャイロセンサx軸情報
+				Gyro[1] = e.values[1];	//ジャイロセンサy軸情報
+				Gyro[2] = e.values[2];	//ジャイロセンサz軸情報
+				getValueFlag[2] = true;
+				break;
+			case Sensor.TYPE_GRAVITY:
+				Gravity[0] = e.values[0];	//重力加速度センサx軸情報
+				Gravity[1] = e.values[1];	//重力加速度センサy軸情報
+				Gravity[2] = e.values[2];	//重力加速度センサz軸情報
+				getValueFlag[3] = true;
+				break;
+			case Sensor.TYPE_MAGNETIC_FIELD:
+				Magnetic[0] = e.values[0];	//磁気センサx軸情報
+				Magnetic[1] = e.values[1];	//磁気センサy軸情報
+				Magnetic[2] = e.values[2];	//磁気センサz軸情報
+				getValueFlag[4] = true;
+				break;
+			case Sensor.TYPE_ORIENTATION:
+				Orientation[0] = e.values[0];	//傾きセンサ方位角情報(Yaw)
+				Orientation[1] = e.values[1];	//傾きセンサ傾斜角情報(Pitch)
+				Orientation[2] = e.values[2];	//傾きセンサ回転角情報(Roll)
+				getValueFlag[5] = true;
+				break;
+			case Sensor.TYPE_ROTATION_VECTOR:
+				RotationV[0] = e.values[0];	//回転ベクトルセンサ情報 x*sin(θ/2)
+				RotationV[1] = e.values[1];	//回転ベクトルセンサ情報 y*sin(θ/2)
+				RotationV[2] = e.values[2];	//回転ベクトルセンサ情報 z*sin(θ/2)
+				RotationV[3] = e.values[3];	//回転ベクトルセンサ情報 cos(θ/2)
+				RotationV[4] = e.values[4];	//回転ベクトルセンサ情報 estimated heading Accuracy (in radians) (-1 if unavailable)
+				getValueFlag[6] = true;
+				break;
+			case Sensor.TYPE_LIGHT:
+				LightData = e.values[0];	//照度センサの距離情報
+				getValueFlag[7] = true;
+				break;
+			case Sensor.TYPE_PRESSURE:
+				PressureData = e.values[0];		//気圧センサの圧力情報
+				getValueFlag[8] = true;
+				break;
+			case Sensor.TYPE_PROXIMITY:
+				ProximityData = e.values[0];	//近接センサの距離情報
+				getValueFlag[9] = true;
+				break;
+			case Sensor.TYPE_AMBIENT_TEMPERATURE:
+				AmbientData = e.values[0];	//周辺温度センサ情報
+				getValueFlag[10] = true;
+				break;
+			default:
+				break;
 			}
+
 		}
 		
 		public void onAccuracyChanged(Sensor s,int accuracy){}
