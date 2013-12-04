@@ -135,7 +135,7 @@ public class GPSFilterImpl extends DataFlowComponentBase {
         m_InTimedDoubleDataSpeedIn = new InPort<TimedDouble>("InTimedDoubleDataSpeed", m_inDataSpeed);
         m_outGPSData_val = new GPSData();
         m_outGPSData = new DataRef<GPSData>(m_outGPSData_val);
-        m_OutTimedGPSDataOut = new OutPort<GPSData>("OutTimedGPSData", m_outGPSData);
+        m_OutGPSDataOut = new OutPort<GPSData>("OutGPSData", m_outGPSData);
         m_outPositionSeq_val = new TimedDoubleSeq();
         m_outPositionSeq = new DataRef<TimedDoubleSeq>(m_outPositionSeq_val);
         m_OutTimedPositionSeqOut = new OutPort<TimedDoubleSeq>("OutTimedPositionSeq", m_outPositionSeq);
@@ -183,7 +183,7 @@ public class GPSFilterImpl extends DataFlowComponentBase {
         addInPort("InTimedDoubleDataSpeed", m_InTimedDoubleDataSpeedIn);
         
         // Set OutPort buffer
-        addOutPort("OutTimedGPSData", m_OutTimedGPSDataOut);
+        addOutPort("OutGPSData", m_OutGPSDataOut);
         addOutPort("OutTimedPositionSeq", m_OutTimedPositionSeqOut);
         addOutPort("OutTimedDoubleDataLatitude", m_OutTimedDoubleDataLatitudeOut);
         addOutPort("OutTimedDoubleDataLongitude", m_OutTimedDoubleDataLongitudeOut);
@@ -588,7 +588,7 @@ public class GPSFilterImpl extends DataFlowComponentBase {
         	TimedDouble subDataSpeed = new TimedDouble(tm,spe);
         	TimedDoubleSeq subDoubleSeq = new TimedDoubleSeq(tm,lla);
         	
-			m_OutTimedGPSDataOut.write(subGPSData);	
+			m_OutGPSDataOut.write(subGPSData);	
 			m_OutTimedDoubleDataLatitudeOut.write(subDataLatitude);
 			m_OutTimedDoubleDataLongitudeOut.write(subDataLongitude);
 			m_OutTimedDoubleDataAltitudeOut.write(subDataAltitude);
@@ -852,7 +852,7 @@ public class GPSFilterImpl extends DataFlowComponentBase {
      * - Type: GPSData
      * - Number: 1
      */
-    protected OutPort<GPSData> m_OutTimedGPSDataOut;
+    protected OutPort<GPSData> m_OutGPSDataOut;
 
     protected TimedDoubleSeq m_outPositionSeq_val;
     protected DataRef<TimedDoubleSeq> m_outPositionSeq;
