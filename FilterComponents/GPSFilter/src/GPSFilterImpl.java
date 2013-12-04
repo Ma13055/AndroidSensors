@@ -573,14 +573,15 @@ public class GPSFilterImpl extends DataFlowComponentBase {
 		double[] lla = {lat,lon,alt};
 		
 		Time tm = new Time((int)array[6],(int)array[7]);
-		GPSTime gpstm = new GPSTime((int)array[8],(int)array[9]);
+		GPSTime gpstime = new GPSTime((int)array[8],(int)array[9]);
+		Time gpstm = new Time((int)array[8],(int)array[9]);
 		
 		System.out.println("Out data Lat:"+lat+" Lon:"+lon+" Alt:"+alt
 				+" Err:"+err+" Hea:"+hea+" Spe:"+spe);
         try {
-        	GPSData subGPSData = new GPSData(tm,gpstm,lat,lon,alt,err,0.0,hea,spe,0.0,(short)0,GPSFixType.GPS_FIX_NONE);
+        	GPSData subGPSData = new GPSData(tm,gpstime,lat,lon,alt,err,0.0,hea,spe,0.0,(short)0,GPSFixType.GPS_FIX_NONE);
         	TimedDouble subDataLatitude = new TimedDouble(tm,lat);
-        	TimedDouble subDataLongitude = new TimedDouble(tm,lon);
+        	TimedDouble subDataLongitude = new TimedDouble(gpstm,lon);
         	TimedDouble subDataAltitude = new TimedDouble(tm,alt);
         	TimedDouble subDataError = new TimedDouble(tm,err);
         	TimedDouble subDataHeading = new TimedDouble(tm,hea);
