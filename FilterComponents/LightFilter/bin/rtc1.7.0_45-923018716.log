@@ -1,0 +1,21 @@
+Apr 25 09:51:33.788 Manager INFO     : 1.1.0
+Apr 25 09:51:33.789 Manager INFO     : Copyright (C) 2003-2008
+Apr 25 09:51:33.789 Manager INFO     :   Noriaki Ando
+Apr 25 09:51:33.790 Manager INFO     :   Task-intelligence Research Group,
+Apr 25 09:51:33.790 Manager INFO     :   Intelligent Systems Research Institute, AIST
+Apr 25 09:51:33.791 Manager INFO     : Manager starting.
+Apr 25 09:51:33.791 Manager INFO     : Starting local logging.
+Apr 25 09:51:34.008 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Apr 25 09:51:35.155 ManagerServant INFO     : Master manager not found.
+Apr 25 09:54:44.058 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 25 09:54:44.064 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 25 10:15:47.551 InTimedDoubleData WARN     : Dead connection:095446
+Apr 25 10:15:47.789 InTimedDoubleData WARN     : Exception caught: minor code(1398079741).org.omg.CORBA.INTERNAL:   vmcid: SUN  minor code: 253 completed: Maybe
+Apr 25 10:41:37.586 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 25 10:41:37.589 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 25 10:42:52.916 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 25 10:42:52.942 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 25 10:43:57.879 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 25 10:43:57.882 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 25 11:04:23.571 InTimedDoubleData WARN     : Dead connection:104510
+Apr 25 11:04:24.222 InTimedDoubleData WARN     : Exception caught: minor code(1398079741).org.omg.CORBA.INTERNAL:   vmcid: SUN  minor code: 253 completed: Maybe

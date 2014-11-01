@@ -1,0 +1,17 @@
+Apr 25 09:51:18.941 Manager INFO     : 1.1.0
+Apr 25 09:51:18.942 Manager INFO     : Copyright (C) 2003-2008
+Apr 25 09:51:18.943 Manager INFO     :   Noriaki Ando
+Apr 25 09:51:18.943 Manager INFO     :   Task-intelligence Research Group,
+Apr 25 09:51:18.944 Manager INFO     :   Intelligent Systems Research Institute, AIST
+Apr 25 09:51:18.945 Manager INFO     : Manager starting.
+Apr 25 09:51:18.945 Manager INFO     : Starting local logging.
+Apr 25 09:51:19.175 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Apr 25 09:51:20.329 ManagerServant INFO     : Master manager not found.
+Apr 25 09:54:28.697 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 25 09:54:28.725 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 25 10:11:06.833 InTimedDoubleDataYaw WARN     : Dead connection:095431
+Apr 25 10:11:07.844 InTimedDoubleDataYaw WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 25 10:11:08.860 InTimedDoubleDataPitch WARN     : Dead connection:095434
+Apr 25 10:11:09.880 InTimedDoubleDataPitch WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 25 10:11:10.904 InTimedDoubleDataRoll WARN     : Dead connection:095437
+Apr 25 10:11:11.920 InTimedDoubleDataRoll WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No

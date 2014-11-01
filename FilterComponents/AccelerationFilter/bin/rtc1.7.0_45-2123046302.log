@@ -1,0 +1,27 @@
+Nov 29 16:46:08.502 Manager INFO     : 1.1.0
+Nov 29 16:46:08.512 Manager INFO     : Copyright (C) 2003-2008
+Nov 29 16:46:08.512 Manager INFO     :   Noriaki Ando
+Nov 29 16:46:08.512 Manager INFO     :   Task-intelligence Research Group,
+Nov 29 16:46:08.512 Manager INFO     :   Intelligent Systems Research Institute, AIST
+Nov 29 16:46:08.512 Manager INFO     : Manager starting.
+Nov 29 16:46:08.512 Manager INFO     : Starting local logging.
+Nov 29 16:46:09.802 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:46:10.972 ManagerServant INFO     : Master manager not found.
+Nov 29 16:46:19.785 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:46:30.970 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:46:30.971 NamingManager INFO     : Connected to a name server: localhost:2809/corba
+Nov 29 16:46:40.998 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:46:52.194 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:46:52.194 NamingManager INFO     : Connected to a name server: localhost:2809/corba
+Nov 29 16:47:02.235 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:47:13.372 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:47:13.373 NamingManager INFO     : Connected to a name server: localhost:2809/corba
+Nov 29 16:47:23.398 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:47:34.525 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:47:34.525 NamingManager INFO     : Connected to a name server: localhost:2809/corba
+Nov 29 16:47:44.531 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:47:55.693 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:47:55.693 NamingManager INFO     : Connected to a name server: localhost:2809/corba
+Nov 29 16:48:05.708 NamingManager INFO     : Name server: localhost:2809 (corba) disappeared.
+Nov 29 16:48:16.837 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Nov 29 16:48:16.838 NamingManager INFO     : Connected to a name server: localhost:2809/corba

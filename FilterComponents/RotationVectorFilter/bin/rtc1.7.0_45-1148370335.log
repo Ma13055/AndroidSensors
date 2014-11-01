@@ -1,0 +1,21 @@
+Apr 24 13:32:22.553 Manager INFO     : 1.1.0
+Apr 24 13:32:22.554 Manager INFO     : Copyright (C) 2003-2008
+Apr 24 13:32:22.555 Manager INFO     :   Noriaki Ando
+Apr 24 13:32:22.555 Manager INFO     :   Task-intelligence Research Group,
+Apr 24 13:32:22.556 Manager INFO     :   Intelligent Systems Research Institute, AIST
+Apr 24 13:32:22.557 Manager INFO     : Manager starting.
+Apr 24 13:32:22.557 Manager INFO     : Starting local logging.
+Apr 24 13:32:22.786 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Apr 24 13:32:23.961 ManagerServant INFO     : Master manager not found.
+Apr 24 13:33:02.133 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Apr 24 13:33:02.138 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Apr 24 13:47:50.199 InTimedDoubleDataZ WARN     : Dead connection:133350
+Apr 24 13:47:50.200 InTimedDoubleDataZ WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 24 13:47:50.201 InTimedDoubleDataCos WARN     : Dead connection:133355
+Apr 24 13:47:50.202 InTimedDoubleDataCos WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 24 13:47:50.203 InTimedDoubleAccuracy WARN     : Dead connection:133400
+Apr 24 13:47:50.203 InTimedDoubleAccuracy WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 24 13:48:28.066 InTimedDoubleDataX WARN     : Dead connection:133339
+Apr 24 13:48:28.067 InTimedDoubleDataX WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No
+Apr 24 13:48:28.068 InTimedDoubleDataY WARN     : Dead connection:133345
+Apr 24 13:48:28.069 InTimedDoubleDataY WARN     : Exception caught: minor code(1398079689).org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 201  completed: No

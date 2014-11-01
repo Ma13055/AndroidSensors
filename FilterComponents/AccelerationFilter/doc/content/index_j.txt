@@ -1,0 +1,146 @@
+AccelerationFilter - 日本語
+=======================
+
+
+はじめに
+========
+
+クラスについては、 `APIドキュメンテーション`_ に参照してください。
+
+.. _`APIドキュメンテーション`:
+   doxygen/html/index.html
+
+条件
+====
+
+AccelerationFilterはOpenRTM-aist 1.0.0以上のC++版が必要です。
+
+AccelerationFilterは CMake_ を使います。CMake 2.8以上が必要です。
+
+.. _CMAke:
+   http://www.cmake.org
+
+インストール
+============
+
+インストーラ
+------------
+
+Windowsのユーザはインストーラパッケージを使用してコンポーネントをインストール
+することができます。これはコンポーネント及びそのすべての必要なライブラリを
+インストールします。Windowsでインストールする場合、インストーラの使用を推奨してます。
+
+- インストーラをダウンロードしてください。
+- インストールを始めるためにインストーラをダブルクリックしてください。
+- 指示にしたがってコンポーネントをインストールしてください。
+- 環境変数の変更を適用するため、コンポーネントを使用する前にコンピューターを
+  再起動する必要があるかもしれません。
+
+AccelerationFilterは ``AccelerationFilterComp`` の実行をダブルクリックして実行することが
+できます。あるいは、 ``AccelerationFilter`` を初期化関数の ``AccelerationFilterInit`` を利用して、
+マネージャにロードすることができます。
+
+ソースから
+----------
+
+ソースを使う場合は以下の手順でインストールしてください。
+
+- ソースをダウンロードして解凍してください::
+
+    tar -xvzf AccelerationFilter-1.0.0.tar.gz
+
+- 解凍されたフォルダに入ってください::
+
+    cd AccelerationFilter-1.0.0
+
+- ``build`` フォルダを作ってください::
+
+    mkdir build
+
+- `` build`` フォルダに入ってください::
+
+    cd build
+
+- CMakeを実行してください::
+
+    cmake ../
+
+- エラーが出無い場合、makeを実行してください::
+
+    make
+
+- ``make install`` でコンポーネントをインストールしてください。選択された
+  インストール場所に書き込み権限があるかを確認してください::
+
+  ``make install``
+
+- インストールする場所はccmakeを実行して ``CMAKE_INSTALL_PREFIX`` を
+  設定することで変更が可能です。
+
+    ccmake ../
+
+ここまでで、コンポーネントが使えるようになりました。コンフィグレーションは次のセクションを
+参照してください。
+
+AccelerationFilterは ``AccelerationFilterComp`` を実行（ ``${prefix}/components/bin`` に
+インストールされます）することでスタンドアローンモードで実行することができます。
+あるいは、 ``libAccelerationFilter.so`` を初期化関数の ``AccelerationFilterInit`` を利用して、
+マネージャにロードすることができます。このライブラリは ``${prefix}/components/lib`` 
+または ``${prefix}/components/lib64`` にインストールされます。
+
+
+コンフィグレーション
+====================
+
+使えるコンフィグレーションパラメータは以下のテーブルを参照
+してください。
+
+================ ================== ================ ====
+パラメータ       データ型           デフォルト値     意味
+================ ================== ================ ====
+ImportTextName   string             null             File name you want to load.
+ChangedOfBaseline int                0                Change the baseline of the sensor to current value.
+VariableToRounding int                1                Variable rounding of input data.<br/>Sensor sensitivity reduces variable increases.
+PitchTime        int                0                cycle of the read mode.
+================ ================== ================ ====
+
+ポート
+======
+
+コンポーネントによって提供されるポートは以下のテーブルで述べられています。
+
+=============== =========== ============================== ====
+ポート名        ポート型    データ型                       意味
+=============== =========== ============================== ====
+InTimedDoubleDataX InPort      RTC::TimedDouble               Output dataX from "GetAcceleration" is input.
+InTimedDoubleDataY InPort      RTC::TimedDouble               Output dataY from "GetAcceleration" is input.
+InTimedDoubleDataZ InPort      RTC::TimedDouble               Output dataZ from "GetAcceleration" is input.
+OutTimedAcceleration3D OutPort     RTC::TimedAcceleration3D       Acceleration sensor data in the X , Y and Z axis of the filtered are output.
+OutTimedAcceleration2D OutPort     RTC::TimedAcceleration2D       Acceleration sensor data in the X and Y axis of the filtered are output.
+OutTimedDoubleDataX OutPort     RTC::TimedDouble               Acceleration sensor data in the X-axis of the filtered is output.
+OutTimedDoubleDataY OutPort     RTC::TimedDouble               Acceleration sensor data in the Y-axis of the filtered is output.
+OutTimedDoubleDataZ OutPort     RTC::TimedDouble               Acceleration sensor data in the Z-axis of the filtered is output.
+OutTimedDoubleDataSeq OutPort     RTC::TimedDoubleSeq            Acceleration sensor data in the X , Y and Z axis of the filtered are output.<br/>seq[0] = dataX<br/>seq[1] = dataY<br/>seq[2] = dataZ
+OutTimedFloatDataX OutPort     RTC::TimedFloat                Acceleration sensor data in the X-axis of the filtered is output.
+OutTimedFloatDataY OutPort     RTC::TimedFloat                Acceleration sensor data in the Y-axis of the filtered is output.
+OutTimedFloatDataZ OutPort     RTC::TimedFloat                Acceleration sensor data in the Z-axis of the filtered is output.
+OutTimedFloatDataSeq OutPort     RTC::TimedFloatSeq             Acceleration sensor data in the X , Y and Z axis of the filtered are output.<br/>seq[0] = dataX<br/>seq[1] = dataY<br/>seq[2] = dataZ
+=============== =========== ============================== ====
+
+例
+==
+
+例のrtc.confファイルは ``${prefix}/components/share/AccelerationFilter/examples/conf/``
+フォルダにインストールされています。
+
+Changelog
+=========
+
+
+License
+=======
+
+このソフトウェアは産業技術総合研究所で開発されています。承認番号はH23PRO-????
+です。このソフトウェアは Lesser General Public License (LGPL) ライセンスとして
+公開されてます。COPYING.LESSER を参照してください。
+

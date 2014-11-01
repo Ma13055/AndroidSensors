@@ -1,0 +1,157 @@
+GPSFilterName - English
+========================
+
+.. toctree::
+   :hidden:
+
+   index_j
+
+
+Introduction
+============
+
+
+For a full list of classes and functions, see the `API documentation`_.
+
+.. _`API Documentation`:
+   doxygen/html/index.html
+
+Requirements
+============
+
+GPSFilter uses the `CMake build system`. You will need at least version
+2.8 to be able to build the component.
+
+.. _`CMAke build system`:
+   http://www.cmake.org
+
+
+Installation
+============
+
+Binary
+------
+
+Users of Windows can install the component using the binary installer. This
+will install the component and all its necessary dependencies. It is the
+recommended method of installation in Windows.
+
+- Download the installer from the website.
+- Double-click the executable file to begin installation.
+- Follow the instructions to install the component.
+- You may need to restart your computer for environment variable changes
+  to take effect before using the component.
+
+The component can be launched by double-clicking the
+``GPSFilterComp`` executable. The ``GPSFilter`` library
+is available for loading into a manager, using the initialisation function
+``GPSFilterInit``.
+
+From source
+-----------
+
+Follow these steps to install GPSFilter from source in any operating
+system:
+
+- Download the source, either from the repository or a source archive,
+  and extract it somewhere::
+
+    tar -xvzf GPSFilter-1.0.0.tar.gz
+
+- Change to the directory containing the extracted source::
+
+    cd GPSFilter-1.0.0
+
+- Create a directory called ``build``::
+
+    mkdir build
+
+- Change to that directory::
+
+    cd build
+
+- Run cmake or cmake-gui::
+
+    cmake ../
+
+- If no errors occurred, run make::
+
+    make
+
+- Finally, install the component. Ensure the necessary permissions to
+  install into the chosen prefix are available::
+
+    make install
+
+- The install destination can be changed by executing ccmake and changing
+  the variable ``CMAKE_INSTALL_PREFIX``::
+
+    ccmake ../
+
+The component is now ready for use. See the next section for instructions on
+configuring the component.
+
+GPSFilter can be launched in stand-alone mode by executing the
+``GPSFilterComp`` executable (installed into ``${prefix}/components/bin``).
+Alternatively, ``libGPSFilter.so`` can be loaded into a manager, using the
+initialisation function ``GPSFilterInit``. This shared object can be found in
+``${prefix}/components/lib`` or ``${prefix}/components/lib64``.
+
+
+Configuration
+=============
+
+The available configuration parameters are described below:
+
+================ ================== ================ ======
+Parameter        Data type          Default Value    Effect
+================ ================== ================ ======
+ImportTextName   string             null             File name you want to load.
+ChangedOfBaseline int                0                Change the baseline of the sensor to current value.
+VariableToRounding int                1                Variable rounding of input data.<br/>Sensor sensitivity reduces variable increases.
+PitchTime        int                1000             cycle of the read mode.
+================ ================== ================ ======
+
+Ports
+=====
+
+The ports provided by the component are described below:
+
+=============== =========== ============================== =======
+Name            Type        Data type                      Purpose
+=============== =========== ============================== =======
+InTimedDoubleDataLatitude InPort      RTC::TimedDouble               Output dataLatitude from "GetGPS" is input.
+InTimedDoubleDataLongitude InPort      RTC::TimedDouble               Output dataLongitude from "GetGPS" is input.
+InTimedDoubleDataAltitude InPort      RTC::TimedDouble               Output dataAltitude from "GetGPS" is input.
+InTimedDoubleDataError InPort      RTC::TimedDouble               Output dataError from "GetGPS" is input.
+InTimedDoubleDataHeading InPort      RTC::TimedDouble               Output dataHeading from "GetGPS" is input.
+InTimedDoubleDataSpeed InPort      RTC::TimedDouble               Output dataSpeed from "GetGPS" is input.
+OutTimedGPSData OutPort     RTC::GPSData                   GPS sensor data of the filtered are output.<br/>NotSupport:verticalError,verticalSpeed,numSatellites,fixType
+OutTimedPositionSeq OutPort     RTC::TimedDoubleSeq            GPS sensor data in the Latitude, Longitude and Altitude of the filtered are output.<br/>Seq[0] = Latitude;<br/>Seq[1] = Longitude;<br/>Seq[2] = Altitude;
+OutTimedDoubleDataLatitude OutPort     RTC::TimedDouble               GPS sensor data in the Latitude of the filtered is output.
+OutTimedDoubleDataLongitude OutPort     RTC::TimedDouble               GPS sensor data in the Longitude of the filtered is output.
+OutTimedDoubleDataAltitude OutPort     RTC::TimedDouble               GPS sensor data in the Altitude of the filtered is output.
+OutTimedDoubleDataError OutPort     RTC::TimedDouble               GPS sensor data in the Error of the filtered is output.
+OutTimedDoubleDataHeading OutPort     RTC::TimedDouble               GPS sensor data in the Heading of the filtered is output.
+OutTimedDoubleDataSpeed OutPort     RTC::TimedDouble               GPS sensor data in the Speed of the filtered is output.
+=============== =========== ============================== =======
+
+Examples
+========
+
+An example configuration file is provided in the
+``${prefix}/components/share/GPSFilter/examples/conf/`` directory.
+
+Changelog
+=========
+
+
+
+License
+=======
+
+This software is developed at the National Institute of Advanced
+Industrial Science and Technology. Approval number H23PRO-????. This
+software is licensed under the Lesser General Public License. See
+COPYING.LESSER.
+

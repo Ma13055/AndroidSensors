@@ -1,0 +1,13 @@
+Dec 11 19:22:52.612 Manager INFO     : 1.1.0
+Dec 11 19:22:52.613 Manager INFO     : Copyright (C) 2003-2008
+Dec 11 19:22:52.614 Manager INFO     :   Noriaki Ando
+Dec 11 19:22:52.614 Manager INFO     :   Task-intelligence Research Group,
+Dec 11 19:22:52.614 Manager INFO     :   Intelligent Systems Research Institute, AIST
+Dec 11 19:22:52.615 Manager INFO     : Manager starting.
+Dec 11 19:22:52.616 Manager INFO     : Starting local logging.
+Dec 11 19:22:52.881 NamingManager INFO     : NameServer connection succeeded: corba/localhost:2809
+Dec 11 19:22:54.084 ManagerServant INFO     : Master manager not found.
+Dec 11 19:23:00.011 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Dec 11 19:23:00.145 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+Dec 11 19:23:11.928 SdoServiceAdmin WARN     : No available SDO service in the factory: 
+Dec 11 19:23:11.933 SdoServiceAdmin WARN     : No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
